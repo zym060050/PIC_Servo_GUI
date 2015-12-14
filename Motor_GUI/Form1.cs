@@ -25,6 +25,15 @@ namespace Motor_GUI
         public AddDataDelegate myDelegate;
         //*--- Communication Data ---//
         public string ReadBufferString = "";
+        //CMD ID
+        public const byte CMD_MOTOR_A_FW = 0x01;
+        public const byte CMD_MOTOR_A_BW = 0x02;
+        public const byte CMD_MOTOR_A_STOP = 0x03;
+        public const byte CMD_MOTOR_B_FW = 0x04;
+        public const byte CMD_MOTOR_B_BW = 0x05;
+        public const byte CMD_MOTOR_B_STOP = 0x06;
+        public const byte CMD_MOTOR_READ = 0x07;
+        public const byte CMD_MOTOR_RESET_PIC = 0x1F;
         //CRC
         public const UInt16 CRC_POLYNOMIAL=0x1021; // CRC-CCITT, can change to CRC-16
         public const UInt16 CRC_INITIALE_VALUE = 0x0000;
@@ -46,9 +55,14 @@ namespace Motor_GUI
         private void Form1_Load(object sender, EventArgs e)
         {
             // Initialize when Form is Loaded.
+            textBox_target.Text = "00";
             textBox_command_id.Text = "01";
             textBox_cmd_data1.Text = "F4";
             textBox_cmd_data2.Text = "01";
+            textBox_A_FW.Text = "360";
+            textBox_A_BW.Text = "360";
+            textBox_B_FW.Text = "360";
+            textBox_B_BW.Text = "360";
         }
         //------------------------------------------>
         //  Fucntion: Form Closed
@@ -98,13 +112,13 @@ namespace Motor_GUI
         //------------------------------------------>
         //  Event Function : Send out command data through SerialPort
         //------------------------------------------<
-        public void Send_Command(byte cmd_id, byte cmd_data1, byte cmd_data2)
+        public void Send_Command(byte target, byte cmd_id, byte cmd_data1, byte cmd_data2)
         {
             UInt16 crc = 0;
             byte[] cmd_data = new byte[7];
 
             cmd_data[0] = 0x55;
-            cmd_data[1] = 0xFF;
+            cmd_data[1] = target;
             cmd_data[2] = cmd_id;
             cmd_data[3] = cmd_data1;
             cmd_data[4] = cmd_data2;
@@ -118,6 +132,9 @@ namespace Motor_GUI
             //*--- Start Serial Port COM ---//
             if (SerialPort.IsOpen == true)
             {
+                string str = "Tx: ";
+                message_richTextBox.Invoke(this.myDelegate, str);
+
                 SerialPort.Write(cmd_data, 0, 7);
                 //also log the send out string
                 //Show Hex
@@ -262,6 +279,38 @@ namespace Motor_GUI
         }
 
         //------------------------------------------>
+        //  Function: Target board id text change
+        //------------------------------------------<
+        private void textBox_target_TextChanged(object sender, EventArgs e)
+        {
+            bool enteredLetter = false;
+            Queue<char> text = new Queue<char>();
+            foreach (var ch in this.textBox_target.Text)
+            {
+                if ((ch == '\b') || ('0' <= ch && ch <= '9') || ('A' <= ch && ch <= 'F') || ('a' <= ch && ch <= 'f'))
+                {
+                    text.Enqueue(ch);
+                }
+                else
+                {
+                    enteredLetter = true;
+                }
+            }
+
+            if (enteredLetter)
+            {
+                StringBuilder sb = new StringBuilder();
+                while (text.Count > 0)
+                {
+                    sb.Append(text.Dequeue());
+                }
+
+                this.textBox_target.Text = sb.ToString();
+                this.textBox_target.SelectionStart = this.textBox_target.Text.Length;
+            }
+        }
+
+        //------------------------------------------>
         //  Function: Command id text change
         //------------------------------------------<
         private void command_id_TextChanged(object sender, EventArgs e)
@@ -356,12 +405,199 @@ namespace Motor_GUI
         //------------------------------------------<
         private void command_send_button_Click(object sender, EventArgs e)
         {
-            string str = "Tx: ";
-            message_richTextBox.Invoke(this.myDelegate, str);
+            byte target_board = Convert.ToByte(textBox_target.Text, 16);
             byte cmd_id = Convert.ToByte(textBox_command_id.Text, 16);
             byte cmd_data_1 = Convert.ToByte(textBox_cmd_data1.Text, 16);
             byte cmd_data_2 = Convert.ToByte(textBox_cmd_data2.Text, 16);
-            Send_Command(cmd_id, cmd_data_1, cmd_data_2);
+            Send_Command(target_board, cmd_id, cmd_data_1, cmd_data_2);
+        }
+
+        private void textBox_A_FW_TextChanged(object sender, EventArgs e)
+        {
+            bool enteredLetter = false;
+            Queue<char> text = new Queue<char>();
+            foreach (var ch in this.textBox_A_FW.Text)
+            {
+                if ((ch == '\b') || ('0' <= ch && ch <= '9'))
+                {
+                    text.Enqueue(ch);
+                }
+                else
+                {
+                    enteredLetter = true;
+                }
+            }
+
+            if (enteredLetter)
+            {
+                StringBuilder sb = new StringBuilder();
+                while (text.Count > 0)
+                {
+                    sb.Append(text.Dequeue());
+                }
+
+                this.textBox_A_FW.Text = sb.ToString();
+                this.textBox_A_FW.SelectionStart = this.textBox_A_FW.Text.Length;
+            }
+        }
+
+        private void button_A_FW_Click(object sender, EventArgs e)
+        {
+            byte target_board = Convert.ToByte(textBox_target.Text, 16);
+            byte cmd_id = CMD_MOTOR_A_FW;
+            UInt16 count = Convert.ToUInt16(textBox_A_FW.Text, 10);
+            byte[] b = BitConverter.GetBytes(count);
+            byte cmd_data_1 = b[0];//Lower Byte
+            byte cmd_data_2 = b[1];//Higher Byte
+            Send_Command(target_board, cmd_id, cmd_data_1, cmd_data_2);
+        }
+
+        private void textBox_A_BW_TextChanged(object sender, EventArgs e)
+        {
+            bool enteredLetter = false;
+            Queue<char> text = new Queue<char>();
+            foreach (var ch in this.textBox_A_BW.Text)
+            {
+                if ((ch == '\b') || ('0' <= ch && ch <= '9'))
+                {
+                    text.Enqueue(ch);
+                }
+                else
+                {
+                    enteredLetter = true;
+                }
+            }
+
+            if (enteredLetter)
+            {
+                StringBuilder sb = new StringBuilder();
+                while (text.Count > 0)
+                {
+                    sb.Append(text.Dequeue());
+                }
+
+                this.textBox_A_BW.Text = sb.ToString();
+                this.textBox_A_BW.SelectionStart = this.textBox_A_BW.Text.Length;
+            }
+        }
+
+        private void button_A_BW_Click(object sender, EventArgs e)
+        {
+            byte target_board = Convert.ToByte(textBox_target.Text, 16);
+            byte cmd_id = CMD_MOTOR_A_BW;
+            UInt16 count = Convert.ToUInt16(textBox_A_BW.Text, 10);
+            byte[] b = BitConverter.GetBytes(count);
+            byte cmd_data_1 = b[0];//Lower Byte
+            byte cmd_data_2 = b[1];//Higher Byte
+            Send_Command(target_board, cmd_id, cmd_data_1, cmd_data_2);
+        }
+
+        private void button_A_STOP_Click(object sender, EventArgs e)
+        {
+            byte target_board = Convert.ToByte(textBox_target.Text, 16);
+            byte cmd_id = CMD_MOTOR_A_STOP;
+            Send_Command(target_board, cmd_id, 0, 0);
+        }
+
+        private void textBox_B_FW_TextChanged(object sender, EventArgs e)
+        {
+            bool enteredLetter = false;
+            Queue<char> text = new Queue<char>();
+            foreach (var ch in this.textBox_B_FW.Text)
+            {
+                if ((ch == '\b') || ('0' <= ch && ch <= '9'))
+                {
+                    text.Enqueue(ch);
+                }
+                else
+                {
+                    enteredLetter = true;
+                }
+            }
+
+            if (enteredLetter)
+            {
+                StringBuilder sb = new StringBuilder();
+                while (text.Count > 0)
+                {
+                    sb.Append(text.Dequeue());
+                }
+
+                this.textBox_B_FW.Text = sb.ToString();
+                this.textBox_B_FW.SelectionStart = this.textBox_B_FW.Text.Length;
+            }
+        }
+
+        private void button_B_FW_Click(object sender, EventArgs e)
+        {
+            byte target_board = Convert.ToByte(textBox_target.Text, 16);
+            byte cmd_id = CMD_MOTOR_B_FW;
+            UInt16 count = Convert.ToUInt16(textBox_B_FW.Text, 10);
+            byte[] b = BitConverter.GetBytes(count);
+            byte cmd_data_1 = b[0];//Lower Byte
+            byte cmd_data_2 = b[1];//Higher Byte
+            Send_Command(target_board, cmd_id, cmd_data_1, cmd_data_2);
+        }
+
+        private void textBox_B_BW_TextChanged(object sender, EventArgs e)
+        {
+            bool enteredLetter = false;
+            Queue<char> text = new Queue<char>();
+            foreach (var ch in this.textBox_B_BW.Text)
+            {
+                if ((ch == '\b') || ('0' <= ch && ch <= '9'))
+                {
+                    text.Enqueue(ch);
+                }
+                else
+                {
+                    enteredLetter = true;
+                }
+            }
+
+            if (enteredLetter)
+            {
+                StringBuilder sb = new StringBuilder();
+                while (text.Count > 0)
+                {
+                    sb.Append(text.Dequeue());
+                }
+
+                this.textBox_B_BW.Text = sb.ToString();
+                this.textBox_B_BW.SelectionStart = this.textBox_B_BW.Text.Length;
+            }
+        }
+
+        private void button_B_BW_Click(object sender, EventArgs e)
+        {
+            byte target_board = Convert.ToByte(textBox_target.Text, 16);
+            byte cmd_id = CMD_MOTOR_B_BW;
+            UInt16 count = Convert.ToUInt16(textBox_B_BW.Text, 10);
+            byte[] b = BitConverter.GetBytes(count);
+            byte cmd_data_1 = b[0];//Lower Byte
+            byte cmd_data_2 = b[1];//Higher Byte
+            Send_Command(target_board, cmd_id, cmd_data_1, cmd_data_2);
+        }
+
+        private void button_B_STOP_Click(object sender, EventArgs e)
+        {
+            byte target_board = Convert.ToByte(textBox_target.Text, 16);
+            byte cmd_id = CMD_MOTOR_B_STOP;
+            Send_Command(target_board, cmd_id, 0, 0);
+        }
+
+        private void button_read_count_Click(object sender, EventArgs e)
+        {
+            byte target_board = Convert.ToByte(textBox_target.Text, 16);
+            byte cmd_id = CMD_MOTOR_READ;
+            Send_Command(target_board, cmd_id, 0, 0);
+        }
+
+        private void button_reset_pic_Click(object sender, EventArgs e)
+        {
+            byte target_board = Convert.ToByte(textBox_target.Text, 16);
+            byte cmd_id = CMD_MOTOR_RESET_PIC;
+            Send_Command(target_board, cmd_id, 0, 0);
         }
     }
 }

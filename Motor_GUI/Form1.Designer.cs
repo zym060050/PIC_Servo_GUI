@@ -42,14 +42,35 @@
             this.message_richTextBox = new System.Windows.Forms.RichTextBox();
             this.Clear_Button = new System.Windows.Forms.Button();
             this.groupBox_Commands = new System.Windows.Forms.GroupBox();
-            this.label_cmd_id = new System.Windows.Forms.Label();
-            this.label_cmd_data1 = new System.Windows.Forms.Label();
             this.label_cmd_data2 = new System.Windows.Forms.Label();
-            this.textBox_cmd_data1 = new System.Windows.Forms.TextBox();
+            this.label_cmd_data1 = new System.Windows.Forms.Label();
+            this.label_cmd_id = new System.Windows.Forms.Label();
             this.textBox_cmd_data2 = new System.Windows.Forms.TextBox();
+            this.textBox_cmd_data1 = new System.Windows.Forms.TextBox();
+            this.groupBox_TargetBoardID = new System.Windows.Forms.GroupBox();
+            this.textBox_target = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox_controls = new System.Windows.Forms.GroupBox();
+            this.button_A_FW = new System.Windows.Forms.Button();
+            this.button_A_BW = new System.Windows.Forms.Button();
+            this.button_A_STOP = new System.Windows.Forms.Button();
+            this.textBox_A_FW = new System.Windows.Forms.TextBox();
+            this.textBox_A_BW = new System.Windows.Forms.TextBox();
+            this.button_B_FW = new System.Windows.Forms.Button();
+            this.button_B_BW = new System.Windows.Forms.Button();
+            this.button_B_STOP = new System.Windows.Forms.Button();
+            this.textBox_B_FW = new System.Windows.Forms.TextBox();
+            this.textBox_B_BW = new System.Windows.Forms.TextBox();
+            this.button_read_count = new System.Windows.Forms.Button();
+            this.button_reset_pic = new System.Windows.Forms.Button();
             this.groupBox_Ports.SuspendLayout();
             this.groupBox_Message.SuspendLayout();
             this.groupBox_Commands.SuspendLayout();
+            this.groupBox_TargetBoardID.SuspendLayout();
+            this.groupBox_controls.SuspendLayout();
             this.SuspendLayout();
             // 
             // SerialPort
@@ -129,13 +150,13 @@
             this.textBox_command_id.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_command_id.MaxLength = 2;
             this.textBox_command_id.Name = "textBox_command_id";
-            this.textBox_command_id.Size = new System.Drawing.Size(61, 22);
+            this.textBox_command_id.Size = new System.Drawing.Size(28, 22);
             this.textBox_command_id.TabIndex = 6;
             this.textBox_command_id.TextChanged += new System.EventHandler(this.command_id_TextChanged);
             // 
             // command_send_button
             // 
-            this.command_send_button.Location = new System.Drawing.Point(7, 81);
+            this.command_send_button.Location = new System.Drawing.Point(339, 106);
             this.command_send_button.Margin = new System.Windows.Forms.Padding(4);
             this.command_send_button.Name = "command_send_button";
             this.command_send_button.Size = new System.Drawing.Size(116, 28);
@@ -152,7 +173,7 @@
             this.groupBox_Message.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Message.Name = "groupBox_Message";
             this.groupBox_Message.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_Message.Size = new System.Drawing.Size(467, 397);
+            this.groupBox_Message.Size = new System.Drawing.Size(467, 514);
             this.groupBox_Message.TabIndex = 60;
             this.groupBox_Message.TabStop = false;
             this.groupBox_Message.Text = "Message";
@@ -164,7 +185,7 @@
             this.message_richTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.message_richTextBox.Name = "message_richTextBox";
             this.message_richTextBox.ReadOnly = true;
-            this.message_richTextBox.Size = new System.Drawing.Size(453, 331);
+            this.message_richTextBox.Size = new System.Drawing.Size(453, 451);
             this.message_richTextBox.TabIndex = 61;
             this.message_richTextBox.TabStop = false;
             this.message_richTextBox.Text = "";
@@ -173,7 +194,7 @@
             // Clear_Button
             // 
             this.Clear_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Clear_Button.Location = new System.Drawing.Point(7, 360);
+            this.Clear_Button.Location = new System.Drawing.Point(7, 480);
             this.Clear_Button.Margin = new System.Windows.Forms.Padding(4);
             this.Clear_Button.Name = "Clear_Button";
             this.Clear_Button.Size = new System.Drawing.Size(100, 28);
@@ -184,19 +205,40 @@
             // 
             // groupBox_Commands
             // 
+            this.groupBox_Commands.Controls.Add(this.label4);
             this.groupBox_Commands.Controls.Add(this.label_cmd_data2);
+            this.groupBox_Commands.Controls.Add(this.label3);
             this.groupBox_Commands.Controls.Add(this.label_cmd_data1);
+            this.groupBox_Commands.Controls.Add(this.label2);
             this.groupBox_Commands.Controls.Add(this.label_cmd_id);
             this.groupBox_Commands.Controls.Add(this.textBox_cmd_data2);
             this.groupBox_Commands.Controls.Add(this.textBox_cmd_data1);
             this.groupBox_Commands.Controls.Add(this.textBox_command_id);
             this.groupBox_Commands.Controls.Add(this.command_send_button);
-            this.groupBox_Commands.Location = new System.Drawing.Point(15, 117);
+            this.groupBox_Commands.Location = new System.Drawing.Point(15, 193);
             this.groupBox_Commands.Name = "groupBox_Commands";
-            this.groupBox_Commands.Size = new System.Drawing.Size(467, 119);
+            this.groupBox_Commands.Size = new System.Drawing.Size(467, 146);
             this.groupBox_Commands.TabIndex = 61;
             this.groupBox_Commands.TabStop = false;
             this.groupBox_Commands.Text = "Send Commands";
+            // 
+            // label_cmd_data2
+            // 
+            this.label_cmd_data2.AutoSize = true;
+            this.label_cmd_data2.Location = new System.Drawing.Point(4, 117);
+            this.label_cmd_data2.Name = "label_cmd_data2";
+            this.label_cmd_data2.Size = new System.Drawing.Size(61, 17);
+            this.label_cmd_data2.TabIndex = 8;
+            this.label_cmd_data2.Text = "DATA 2:";
+            // 
+            // label_cmd_data1
+            // 
+            this.label_cmd_data1.AutoSize = true;
+            this.label_cmd_data1.Location = new System.Drawing.Point(4, 80);
+            this.label_cmd_data1.Name = "label_cmd_data1";
+            this.label_cmd_data1.Size = new System.Drawing.Size(61, 17);
+            this.label_cmd_data1.TabIndex = 8;
+            this.label_cmd_data1.Text = "DATA 1:";
             // 
             // label_cmd_id
             // 
@@ -207,49 +249,223 @@
             this.label_cmd_id.TabIndex = 8;
             this.label_cmd_id.Text = "Command ID:";
             // 
-            // label_cmd_data1
-            // 
-            this.label_cmd_data1.AutoSize = true;
-            this.label_cmd_data1.Location = new System.Drawing.Point(171, 43);
-            this.label_cmd_data1.Name = "label_cmd_data1";
-            this.label_cmd_data1.Size = new System.Drawing.Size(61, 17);
-            this.label_cmd_data1.TabIndex = 8;
-            this.label_cmd_data1.Text = "DATA 1:";
-            // 
-            // label_cmd_data2
-            // 
-            this.label_cmd_data2.AutoSize = true;
-            this.label_cmd_data2.Location = new System.Drawing.Point(311, 43);
-            this.label_cmd_data2.Name = "label_cmd_data2";
-            this.label_cmd_data2.Size = new System.Drawing.Size(61, 17);
-            this.label_cmd_data2.TabIndex = 8;
-            this.label_cmd_data2.Text = "DATA 2:";
-            // 
-            // textBox_cmd_data1
-            // 
-            this.textBox_cmd_data1.Location = new System.Drawing.Point(239, 38);
-            this.textBox_cmd_data1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_cmd_data1.MaxLength = 2;
-            this.textBox_cmd_data1.Name = "textBox_cmd_data1";
-            this.textBox_cmd_data1.Size = new System.Drawing.Size(61, 22);
-            this.textBox_cmd_data1.TabIndex = 6;
-            this.textBox_cmd_data1.TextChanged += new System.EventHandler(this.textBox_cmd_data1_TextChanged);
-            // 
             // textBox_cmd_data2
             // 
-            this.textBox_cmd_data2.Location = new System.Drawing.Point(379, 38);
+            this.textBox_cmd_data2.Location = new System.Drawing.Point(103, 112);
             this.textBox_cmd_data2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_cmd_data2.MaxLength = 2;
             this.textBox_cmd_data2.Name = "textBox_cmd_data2";
-            this.textBox_cmd_data2.Size = new System.Drawing.Size(61, 22);
+            this.textBox_cmd_data2.Size = new System.Drawing.Size(28, 22);
             this.textBox_cmd_data2.TabIndex = 6;
             this.textBox_cmd_data2.TextChanged += new System.EventHandler(this.textBox_cmd_data2_TextChanged);
+            // 
+            // textBox_cmd_data1
+            // 
+            this.textBox_cmd_data1.Location = new System.Drawing.Point(103, 75);
+            this.textBox_cmd_data1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_cmd_data1.MaxLength = 2;
+            this.textBox_cmd_data1.Name = "textBox_cmd_data1";
+            this.textBox_cmd_data1.Size = new System.Drawing.Size(28, 22);
+            this.textBox_cmd_data1.TabIndex = 6;
+            this.textBox_cmd_data1.TextChanged += new System.EventHandler(this.textBox_cmd_data1_TextChanged);
+            // 
+            // groupBox_TargetBoardID
+            // 
+            this.groupBox_TargetBoardID.Controls.Add(this.label1);
+            this.groupBox_TargetBoardID.Controls.Add(this.textBox_target);
+            this.groupBox_TargetBoardID.Location = new System.Drawing.Point(15, 118);
+            this.groupBox_TargetBoardID.Name = "groupBox_TargetBoardID";
+            this.groupBox_TargetBoardID.Size = new System.Drawing.Size(467, 69);
+            this.groupBox_TargetBoardID.TabIndex = 62;
+            this.groupBox_TargetBoardID.TabStop = false;
+            this.groupBox_TargetBoardID.Text = "Target Board ID";
+            // 
+            // textBox_target
+            // 
+            this.textBox_target.Location = new System.Drawing.Point(7, 31);
+            this.textBox_target.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_target.MaxLength = 2;
+            this.textBox_target.Name = "textBox_target";
+            this.textBox_target.Size = new System.Drawing.Size(25, 22);
+            this.textBox_target.TabIndex = 6;
+            this.textBox_target.TextChanged += new System.EventHandler(this.textBox_target_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(39, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "(HEX)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(138, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 17);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "(HEX)";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(138, 78);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 17);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "(HEX)";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(138, 115);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "(HEX)";
+            // 
+            // groupBox_controls
+            // 
+            this.groupBox_controls.Controls.Add(this.button_reset_pic);
+            this.groupBox_controls.Controls.Add(this.button_read_count);
+            this.groupBox_controls.Controls.Add(this.textBox_B_BW);
+            this.groupBox_controls.Controls.Add(this.textBox_B_FW);
+            this.groupBox_controls.Controls.Add(this.button_B_STOP);
+            this.groupBox_controls.Controls.Add(this.button_B_BW);
+            this.groupBox_controls.Controls.Add(this.button_B_FW);
+            this.groupBox_controls.Controls.Add(this.textBox_A_BW);
+            this.groupBox_controls.Controls.Add(this.textBox_A_FW);
+            this.groupBox_controls.Controls.Add(this.button_A_STOP);
+            this.groupBox_controls.Controls.Add(this.button_A_BW);
+            this.groupBox_controls.Controls.Add(this.button_A_FW);
+            this.groupBox_controls.Location = new System.Drawing.Point(15, 346);
+            this.groupBox_controls.Name = "groupBox_controls";
+            this.groupBox_controls.Size = new System.Drawing.Size(467, 182);
+            this.groupBox_controls.TabIndex = 63;
+            this.groupBox_controls.TabStop = false;
+            this.groupBox_controls.Text = "Controls";
+            // 
+            // button_A_FW
+            // 
+            this.button_A_FW.Location = new System.Drawing.Point(7, 32);
+            this.button_A_FW.Name = "button_A_FW";
+            this.button_A_FW.Size = new System.Drawing.Size(116, 28);
+            this.button_A_FW.TabIndex = 0;
+            this.button_A_FW.Text = "A FW";
+            this.button_A_FW.UseVisualStyleBackColor = true;
+            this.button_A_FW.Click += new System.EventHandler(this.button_A_FW_Click);
+            // 
+            // button_A_BW
+            // 
+            this.button_A_BW.Location = new System.Drawing.Point(6, 66);
+            this.button_A_BW.Name = "button_A_BW";
+            this.button_A_BW.Size = new System.Drawing.Size(116, 28);
+            this.button_A_BW.TabIndex = 0;
+            this.button_A_BW.Text = "A BW";
+            this.button_A_BW.UseVisualStyleBackColor = true;
+            this.button_A_BW.Click += new System.EventHandler(this.button_A_BW_Click);
+            // 
+            // button_A_STOP
+            // 
+            this.button_A_STOP.Location = new System.Drawing.Point(7, 100);
+            this.button_A_STOP.Name = "button_A_STOP";
+            this.button_A_STOP.Size = new System.Drawing.Size(116, 28);
+            this.button_A_STOP.TabIndex = 0;
+            this.button_A_STOP.Text = "A STOP";
+            this.button_A_STOP.UseVisualStyleBackColor = true;
+            this.button_A_STOP.Click += new System.EventHandler(this.button_A_STOP_Click);
+            // 
+            // textBox_A_FW
+            // 
+            this.textBox_A_FW.Location = new System.Drawing.Point(126, 35);
+            this.textBox_A_FW.Name = "textBox_A_FW";
+            this.textBox_A_FW.Size = new System.Drawing.Size(100, 22);
+            this.textBox_A_FW.TabIndex = 1;
+            this.textBox_A_FW.TextChanged += new System.EventHandler(this.textBox_A_FW_TextChanged);
+            // 
+            // textBox_A_BW
+            // 
+            this.textBox_A_BW.Location = new System.Drawing.Point(126, 69);
+            this.textBox_A_BW.Name = "textBox_A_BW";
+            this.textBox_A_BW.Size = new System.Drawing.Size(100, 22);
+            this.textBox_A_BW.TabIndex = 1;
+            this.textBox_A_BW.TextChanged += new System.EventHandler(this.textBox_A_BW_TextChanged);
+            // 
+            // button_B_FW
+            // 
+            this.button_B_FW.Location = new System.Drawing.Point(237, 32);
+            this.button_B_FW.Name = "button_B_FW";
+            this.button_B_FW.Size = new System.Drawing.Size(115, 28);
+            this.button_B_FW.TabIndex = 2;
+            this.button_B_FW.Text = "B FW";
+            this.button_B_FW.UseVisualStyleBackColor = true;
+            this.button_B_FW.Click += new System.EventHandler(this.button_B_FW_Click);
+            // 
+            // button_B_BW
+            // 
+            this.button_B_BW.Location = new System.Drawing.Point(237, 66);
+            this.button_B_BW.Name = "button_B_BW";
+            this.button_B_BW.Size = new System.Drawing.Size(115, 28);
+            this.button_B_BW.TabIndex = 2;
+            this.button_B_BW.Text = "B BW";
+            this.button_B_BW.UseVisualStyleBackColor = true;
+            this.button_B_BW.Click += new System.EventHandler(this.button_B_BW_Click);
+            // 
+            // button_B_STOP
+            // 
+            this.button_B_STOP.Location = new System.Drawing.Point(237, 100);
+            this.button_B_STOP.Name = "button_B_STOP";
+            this.button_B_STOP.Size = new System.Drawing.Size(115, 28);
+            this.button_B_STOP.TabIndex = 2;
+            this.button_B_STOP.Text = "B STOP";
+            this.button_B_STOP.UseVisualStyleBackColor = true;
+            this.button_B_STOP.Click += new System.EventHandler(this.button_B_STOP_Click);
+            // 
+            // textBox_B_FW
+            // 
+            this.textBox_B_FW.Location = new System.Drawing.Point(355, 35);
+            this.textBox_B_FW.Name = "textBox_B_FW";
+            this.textBox_B_FW.Size = new System.Drawing.Size(100, 22);
+            this.textBox_B_FW.TabIndex = 3;
+            this.textBox_B_FW.TextChanged += new System.EventHandler(this.textBox_B_FW_TextChanged);
+            // 
+            // textBox_B_BW
+            // 
+            this.textBox_B_BW.Location = new System.Drawing.Point(355, 69);
+            this.textBox_B_BW.Name = "textBox_B_BW";
+            this.textBox_B_BW.Size = new System.Drawing.Size(100, 22);
+            this.textBox_B_BW.TabIndex = 3;
+            this.textBox_B_BW.TextChanged += new System.EventHandler(this.textBox_B_BW_TextChanged);
+            // 
+            // button_read_count
+            // 
+            this.button_read_count.Location = new System.Drawing.Point(110, 138);
+            this.button_read_count.Name = "button_read_count";
+            this.button_read_count.Size = new System.Drawing.Size(116, 28);
+            this.button_read_count.TabIndex = 4;
+            this.button_read_count.Text = "READ";
+            this.button_read_count.UseVisualStyleBackColor = true;
+            this.button_read_count.Click += new System.EventHandler(this.button_read_count_Click);
+            // 
+            // button_reset_pic
+            // 
+            this.button_reset_pic.Location = new System.Drawing.Point(232, 138);
+            this.button_reset_pic.Name = "button_reset_pic";
+            this.button_reset_pic.Size = new System.Drawing.Size(116, 28);
+            this.button_reset_pic.TabIndex = 4;
+            this.button_reset_pic.Text = "RESET PIC";
+            this.button_reset_pic.UseVisualStyleBackColor = true;
+            this.button_reset_pic.Click += new System.EventHandler(this.button_reset_pic_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(969, 422);
+            this.ClientSize = new System.Drawing.Size(969, 539);
+            this.Controls.Add(this.groupBox_controls);
+            this.Controls.Add(this.groupBox_TargetBoardID);
             this.Controls.Add(this.groupBox_Commands);
             this.Controls.Add(this.groupBox_Message);
             this.Controls.Add(this.groupBox_Ports);
@@ -264,6 +480,10 @@
             this.groupBox_Message.ResumeLayout(false);
             this.groupBox_Commands.ResumeLayout(false);
             this.groupBox_Commands.PerformLayout();
+            this.groupBox_TargetBoardID.ResumeLayout(false);
+            this.groupBox_TargetBoardID.PerformLayout();
+            this.groupBox_controls.ResumeLayout(false);
+            this.groupBox_controls.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -287,7 +507,26 @@
         private System.Windows.Forms.Label label_cmd_data1;
         private System.Windows.Forms.Label label_cmd_id;
         private System.Windows.Forms.TextBox textBox_cmd_data1;
-        private System.Windows.Forms.TextBox textBox_cmd_data2;        
+        private System.Windows.Forms.TextBox textBox_cmd_data2;
+        private System.Windows.Forms.GroupBox groupBox_TargetBoardID;
+        private System.Windows.Forms.TextBox textBox_target;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox_controls;
+        private System.Windows.Forms.Button button_A_STOP;
+        private System.Windows.Forms.Button button_A_BW;
+        private System.Windows.Forms.Button button_A_FW;
+        private System.Windows.Forms.TextBox textBox_B_BW;
+        private System.Windows.Forms.TextBox textBox_B_FW;
+        private System.Windows.Forms.Button button_B_STOP;
+        private System.Windows.Forms.Button button_B_BW;
+        private System.Windows.Forms.Button button_B_FW;
+        private System.Windows.Forms.TextBox textBox_A_BW;
+        private System.Windows.Forms.TextBox textBox_A_FW;
+        private System.Windows.Forms.Button button_reset_pic;
+        private System.Windows.Forms.Button button_read_count;        
     }
 }
 

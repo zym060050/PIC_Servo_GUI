@@ -55,14 +55,14 @@ namespace Motor_GUI
         private void Form1_Load(object sender, EventArgs e)
         {
             // Initialize when Form is Loaded.
-            textBox_target.Text = "00";
+            textBox_target.Text = "FF";
             textBox_command_id.Text = "01";
-            textBox_cmd_data1.Text = "F4";
-            textBox_cmd_data2.Text = "01";
-            textBox_A_FW.Text = "360";
-            textBox_A_BW.Text = "360";
-            textBox_B_FW.Text = "360";
-            textBox_B_BW.Text = "360";
+            textBox_cmd_data1.Text = "B4";
+            textBox_cmd_data2.Text = "00";
+            textBox_A_FW.Text = "180";
+            textBox_A_BW.Text = "180";
+            textBox_B_FW.Text = "180";
+            textBox_B_BW.Text = "180";
         }
         //------------------------------------------>
         //  Fucntion: Form Closed

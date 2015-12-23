@@ -35,6 +35,7 @@ namespace Motor_GUI
         public const byte CMD_MOTOR_READ = 0x07;
         public const byte CMD_MOTOR_A_MOVE_TO = 0x08;
         public const byte CMD_MOTOR_B_MOVE_TO = 0x09;
+        public const byte CMD_PID_OUTPUT_LIMIT = 0x0A;
         public const byte CMD_MOTOR_RESET_PIC = 0x1F;
         //CRC
         public const UInt16 CRC_POLYNOMIAL=0x1021; // CRC-CCITT, can change to CRC-16
@@ -67,6 +68,7 @@ namespace Motor_GUI
             textBox_B_BW.Text = "180";
             textBox_A_MoveTo.Text = "30000";
             textBox_B_MoveTo.Text = "30000";
+            textBox_pid_output_limix.Text = "80";
         }
         //------------------------------------------>
         //  Fucntion: Form Closed
@@ -682,6 +684,43 @@ namespace Motor_GUI
             byte target_board = Convert.ToByte(textBox_target.Text, 16);
             byte cmd_id = CMD_MOTOR_RESET_PIC;
             Send_Command(target_board, cmd_id, 0, 0);
+        }
+
+        private void textBox_pid_output_limix_TextChanged(object sender, EventArgs e)
+        {
+            bool enteredLetter = false;
+            Queue<char> text = new Queue<char>();
+            foreach (var ch in this.textBox_pid_output_limix.Text)
+            {
+                if ((ch == '\b') || ('0' <= ch && ch <= '9'))
+                {
+                    text.Enqueue(ch);
+                }
+                else
+                {
+                    enteredLetter = true;
+                }
+            }
+
+            if (enteredLetter)
+            {
+                StringBuilder sb = new StringBuilder();
+                while (text.Count > 0)
+                {
+                    sb.Append(text.Dequeue());
+                }
+
+                this.textBox_pid_output_limix.Text = sb.ToString();
+                this.textBox_pid_output_limix.SelectionStart = this.textBox_pid_output_limix.Text.Length;
+            }
+        }
+
+        private void button_pid_limit_Click(object sender, EventArgs e)
+        {
+            byte target_board = Convert.ToByte(textBox_target.Text, 16);
+            byte cmd_id = CMD_PID_OUTPUT_LIMIT;
+            byte cmd_data_1 = Convert.ToByte(textBox_pid_output_limix.Text, 10);
+            Send_Command(target_board, cmd_id, cmd_data_1, 0);
         }
     }
 }

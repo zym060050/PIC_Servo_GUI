@@ -54,6 +54,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_target = new System.Windows.Forms.TextBox();
             this.groupBox_controls = new System.Windows.Forms.GroupBox();
+            this.textBox_pid_output_limix = new System.Windows.Forms.TextBox();
+            this.button_pid_limit = new System.Windows.Forms.Button();
+            this.textBox_B_MoveTo = new System.Windows.Forms.TextBox();
+            this.textBox_A_MoveTo = new System.Windows.Forms.TextBox();
+            this.button_B_MoveTo = new System.Windows.Forms.Button();
+            this.button_A_MoveTo = new System.Windows.Forms.Button();
             this.button_reset_pic = new System.Windows.Forms.Button();
             this.button_read_count = new System.Windows.Forms.Button();
             this.textBox_B_BW = new System.Windows.Forms.TextBox();
@@ -66,10 +72,6 @@
             this.button_A_STOP = new System.Windows.Forms.Button();
             this.button_A_BW = new System.Windows.Forms.Button();
             this.button_A_FW = new System.Windows.Forms.Button();
-            this.button_A_MoveTo = new System.Windows.Forms.Button();
-            this.button_B_MoveTo = new System.Windows.Forms.Button();
-            this.textBox_A_MoveTo = new System.Windows.Forms.TextBox();
-            this.textBox_B_MoveTo = new System.Windows.Forms.TextBox();
             this.groupBox_Ports.SuspendLayout();
             this.groupBox_Message.SuspendLayout();
             this.groupBox_Commands.SuspendLayout();
@@ -177,7 +179,7 @@
             this.groupBox_Message.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Message.Name = "groupBox_Message";
             this.groupBox_Message.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_Message.Size = new System.Drawing.Size(467, 564);
+            this.groupBox_Message.Size = new System.Drawing.Size(467, 582);
             this.groupBox_Message.TabIndex = 60;
             this.groupBox_Message.TabStop = false;
             this.groupBox_Message.Text = "Message";
@@ -198,7 +200,7 @@
             // Clear_Button
             // 
             this.Clear_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Clear_Button.Location = new System.Drawing.Point(7, 530);
+            this.Clear_Button.Location = new System.Drawing.Point(7, 534);
             this.Clear_Button.Margin = new System.Windows.Forms.Padding(4);
             this.Clear_Button.Name = "Clear_Button";
             this.Clear_Button.Size = new System.Drawing.Size(100, 28);
@@ -332,6 +334,8 @@
             // 
             // groupBox_controls
             // 
+            this.groupBox_controls.Controls.Add(this.textBox_pid_output_limix);
+            this.groupBox_controls.Controls.Add(this.button_pid_limit);
             this.groupBox_controls.Controls.Add(this.textBox_B_MoveTo);
             this.groupBox_controls.Controls.Add(this.textBox_A_MoveTo);
             this.groupBox_controls.Controls.Add(this.button_B_MoveTo);
@@ -350,14 +354,71 @@
             this.groupBox_controls.Controls.Add(this.button_A_FW);
             this.groupBox_controls.Location = new System.Drawing.Point(15, 346);
             this.groupBox_controls.Name = "groupBox_controls";
-            this.groupBox_controls.Size = new System.Drawing.Size(467, 232);
+            this.groupBox_controls.Size = new System.Drawing.Size(467, 250);
             this.groupBox_controls.TabIndex = 63;
             this.groupBox_controls.TabStop = false;
             this.groupBox_controls.Text = "Controls";
             // 
+            // textBox_pid_output_limix
+            // 
+            this.textBox_pid_output_limix.Location = new System.Drawing.Point(126, 171);
+            this.textBox_pid_output_limix.MaxLength = 2;
+            this.textBox_pid_output_limix.Name = "textBox_pid_output_limix";
+            this.textBox_pid_output_limix.Size = new System.Drawing.Size(100, 22);
+            this.textBox_pid_output_limix.TabIndex = 8;
+            this.textBox_pid_output_limix.TextChanged += new System.EventHandler(this.textBox_pid_output_limix_TextChanged);
+            // 
+            // button_pid_limit
+            // 
+            this.button_pid_limit.Location = new System.Drawing.Point(7, 168);
+            this.button_pid_limit.Name = "button_pid_limit";
+            this.button_pid_limit.Size = new System.Drawing.Size(116, 28);
+            this.button_pid_limit.TabIndex = 7;
+            this.button_pid_limit.Text = "PID LIMIT";
+            this.button_pid_limit.UseVisualStyleBackColor = true;
+            this.button_pid_limit.Click += new System.EventHandler(this.button_pid_limit_Click);
+            // 
+            // textBox_B_MoveTo
+            // 
+            this.textBox_B_MoveTo.Location = new System.Drawing.Point(355, 136);
+            this.textBox_B_MoveTo.MaxLength = 6;
+            this.textBox_B_MoveTo.Name = "textBox_B_MoveTo";
+            this.textBox_B_MoveTo.Size = new System.Drawing.Size(100, 22);
+            this.textBox_B_MoveTo.TabIndex = 6;
+            this.textBox_B_MoveTo.TextChanged += new System.EventHandler(this.textBox_B_MoveTo_TextChanged);
+            // 
+            // textBox_A_MoveTo
+            // 
+            this.textBox_A_MoveTo.Location = new System.Drawing.Point(126, 137);
+            this.textBox_A_MoveTo.MaxLength = 6;
+            this.textBox_A_MoveTo.Name = "textBox_A_MoveTo";
+            this.textBox_A_MoveTo.Size = new System.Drawing.Size(100, 22);
+            this.textBox_A_MoveTo.TabIndex = 6;
+            this.textBox_A_MoveTo.TextChanged += new System.EventHandler(this.textBox_A_MoveTo_TextChanged);
+            // 
+            // button_B_MoveTo
+            // 
+            this.button_B_MoveTo.Location = new System.Drawing.Point(237, 134);
+            this.button_B_MoveTo.Name = "button_B_MoveTo";
+            this.button_B_MoveTo.Size = new System.Drawing.Size(115, 28);
+            this.button_B_MoveTo.TabIndex = 5;
+            this.button_B_MoveTo.Text = "B MOVE TO";
+            this.button_B_MoveTo.UseVisualStyleBackColor = true;
+            this.button_B_MoveTo.Click += new System.EventHandler(this.button_B_MoveTo_Click);
+            // 
+            // button_A_MoveTo
+            // 
+            this.button_A_MoveTo.Location = new System.Drawing.Point(7, 134);
+            this.button_A_MoveTo.Name = "button_A_MoveTo";
+            this.button_A_MoveTo.Size = new System.Drawing.Size(115, 28);
+            this.button_A_MoveTo.TabIndex = 5;
+            this.button_A_MoveTo.Text = "A MOVE TO";
+            this.button_A_MoveTo.UseVisualStyleBackColor = true;
+            this.button_A_MoveTo.Click += new System.EventHandler(this.button_A_MoveTo_Click);
+            // 
             // button_reset_pic
             // 
-            this.button_reset_pic.Location = new System.Drawing.Point(232, 182);
+            this.button_reset_pic.Location = new System.Drawing.Point(232, 202);
             this.button_reset_pic.Name = "button_reset_pic";
             this.button_reset_pic.Size = new System.Drawing.Size(116, 28);
             this.button_reset_pic.TabIndex = 4;
@@ -367,7 +428,7 @@
             // 
             // button_read_count
             // 
-            this.button_read_count.Location = new System.Drawing.Point(110, 182);
+            this.button_read_count.Location = new System.Drawing.Point(110, 202);
             this.button_read_count.Name = "button_read_count";
             this.button_read_count.Size = new System.Drawing.Size(116, 28);
             this.button_read_count.TabIndex = 4;
@@ -378,6 +439,7 @@
             // textBox_B_BW
             // 
             this.textBox_B_BW.Location = new System.Drawing.Point(355, 69);
+            this.textBox_B_BW.MaxLength = 6;
             this.textBox_B_BW.Name = "textBox_B_BW";
             this.textBox_B_BW.Size = new System.Drawing.Size(100, 22);
             this.textBox_B_BW.TabIndex = 3;
@@ -386,6 +448,7 @@
             // textBox_B_FW
             // 
             this.textBox_B_FW.Location = new System.Drawing.Point(355, 35);
+            this.textBox_B_FW.MaxLength = 6;
             this.textBox_B_FW.Name = "textBox_B_FW";
             this.textBox_B_FW.Size = new System.Drawing.Size(100, 22);
             this.textBox_B_FW.TabIndex = 3;
@@ -424,6 +487,7 @@
             // textBox_A_BW
             // 
             this.textBox_A_BW.Location = new System.Drawing.Point(126, 69);
+            this.textBox_A_BW.MaxLength = 6;
             this.textBox_A_BW.Name = "textBox_A_BW";
             this.textBox_A_BW.Size = new System.Drawing.Size(100, 22);
             this.textBox_A_BW.TabIndex = 1;
@@ -432,6 +496,7 @@
             // textBox_A_FW
             // 
             this.textBox_A_FW.Location = new System.Drawing.Point(126, 35);
+            this.textBox_A_FW.MaxLength = 6;
             this.textBox_A_FW.Name = "textBox_A_FW";
             this.textBox_A_FW.Size = new System.Drawing.Size(100, 22);
             this.textBox_A_FW.TabIndex = 1;
@@ -467,47 +532,11 @@
             this.button_A_FW.UseVisualStyleBackColor = true;
             this.button_A_FW.Click += new System.EventHandler(this.button_A_FW_Click);
             // 
-            // button_A_MoveTo
-            // 
-            this.button_A_MoveTo.Location = new System.Drawing.Point(7, 134);
-            this.button_A_MoveTo.Name = "button_A_MoveTo";
-            this.button_A_MoveTo.Size = new System.Drawing.Size(115, 28);
-            this.button_A_MoveTo.TabIndex = 5;
-            this.button_A_MoveTo.Text = "A MOVE TO";
-            this.button_A_MoveTo.UseVisualStyleBackColor = true;
-            this.button_A_MoveTo.Click += new System.EventHandler(this.button_A_MoveTo_Click);
-            // 
-            // button_B_MoveTo
-            // 
-            this.button_B_MoveTo.Location = new System.Drawing.Point(237, 134);
-            this.button_B_MoveTo.Name = "button_B_MoveTo";
-            this.button_B_MoveTo.Size = new System.Drawing.Size(115, 28);
-            this.button_B_MoveTo.TabIndex = 5;
-            this.button_B_MoveTo.Text = "B MOVE TO";
-            this.button_B_MoveTo.UseVisualStyleBackColor = true;
-            this.button_B_MoveTo.Click += new System.EventHandler(this.button_B_MoveTo_Click);
-            // 
-            // textBox_A_MoveTo
-            // 
-            this.textBox_A_MoveTo.Location = new System.Drawing.Point(126, 137);
-            this.textBox_A_MoveTo.Name = "textBox_A_MoveTo";
-            this.textBox_A_MoveTo.Size = new System.Drawing.Size(100, 22);
-            this.textBox_A_MoveTo.TabIndex = 6;
-            this.textBox_A_MoveTo.TextChanged += new System.EventHandler(this.textBox_A_MoveTo_TextChanged);
-            // 
-            // textBox_B_MoveTo
-            // 
-            this.textBox_B_MoveTo.Location = new System.Drawing.Point(355, 136);
-            this.textBox_B_MoveTo.Name = "textBox_B_MoveTo";
-            this.textBox_B_MoveTo.Size = new System.Drawing.Size(100, 22);
-            this.textBox_B_MoveTo.TabIndex = 6;
-            this.textBox_B_MoveTo.TextChanged += new System.EventHandler(this.textBox_B_MoveTo_TextChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(969, 589);
+            this.ClientSize = new System.Drawing.Size(969, 612);
             this.Controls.Add(this.groupBox_controls);
             this.Controls.Add(this.groupBox_TargetBoardID);
             this.Controls.Add(this.groupBox_Commands);
@@ -574,7 +603,9 @@
         private System.Windows.Forms.TextBox textBox_B_MoveTo;
         private System.Windows.Forms.TextBox textBox_A_MoveTo;
         private System.Windows.Forms.Button button_B_MoveTo;
-        private System.Windows.Forms.Button button_A_MoveTo;        
+        private System.Windows.Forms.Button button_A_MoveTo;
+        private System.Windows.Forms.TextBox textBox_pid_output_limix;
+        private System.Windows.Forms.Button button_pid_limit;        
     }
 }
 

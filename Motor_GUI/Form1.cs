@@ -592,80 +592,76 @@ namespace Motor_GUI
             Send_Command(target_board, cmd_id, 0, 0);
         }
 
+        Regex reg = new Regex(@"^-?\d*$");
+        bool textChangedByKeyA, textChangedByKeyB;
+        string lastTextA, lastTextB;
+
+        private void textBox_A_MoveTo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsControl(e.KeyChar)) return;
+            if (!reg.IsMatch(textBox_A_MoveTo.Text.Insert(textBox_A_MoveTo.SelectionStart, e.KeyChar.ToString()) + "1"))
+            {
+                e.Handled = true;
+                return;
+            }
+            textChangedByKeyA = true;
+        }
+
         private void textBox_A_MoveTo_TextChanged(object sender, EventArgs e)
         {
-            bool enteredLetter = false;
-            Queue<char> text = new Queue<char>();
-            foreach (var ch in this.textBox_A_MoveTo.Text)
+            if (!textChangedByKeyA)
             {
-                if ((ch == '\b') || ('0' <= ch && ch <= '9'))
+                if (!reg.IsMatch(textBox_A_MoveTo.Text))
                 {
-                    text.Enqueue(ch);
-                }
-                else
-                {
-                    enteredLetter = true;
+                    textBox_A_MoveTo.Text = lastTextA;
+                    return;
                 }
             }
-
-            if (enteredLetter)
-            {
-                StringBuilder sb = new StringBuilder();
-                while (text.Count > 0)
-                {
-                    sb.Append(text.Dequeue());
-                }
-
-                this.textBox_A_MoveTo.Text = sb.ToString();
-                this.textBox_A_MoveTo.SelectionStart = this.textBox_A_MoveTo.Text.Length;
-            }
+            else textChangedByKeyA = false;
+            lastTextA = textBox_A_MoveTo.Text;
         }
 
         private void button_A_MoveTo_Click(object sender, EventArgs e)
         {
             byte target_board = Convert.ToByte(textBox_target.Text, 16);
             byte cmd_id = CMD_MOTOR_A_MOVE_TO;
-            UInt16 count = Convert.ToUInt16(textBox_A_MoveTo.Text, 10);
+            Int16 count = Convert.ToInt16(textBox_A_MoveTo.Text, 10);
             byte[] b = BitConverter.GetBytes(count);
             byte cmd_data_1 = b[0];//Lower Byte
             byte cmd_data_2 = b[1];//Higher Byte
             Send_Command(target_board, cmd_id, cmd_data_1, cmd_data_2);
         }
 
+        private void textBox_B_MoveTo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsControl(e.KeyChar)) return;
+            if (!reg.IsMatch(textBox_B_MoveTo.Text.Insert(textBox_B_MoveTo.SelectionStart, e.KeyChar.ToString()) + "1"))
+            {
+                e.Handled = true;
+                return;
+            }
+            textChangedByKeyB = true;
+        }
+
         private void textBox_B_MoveTo_TextChanged(object sender, EventArgs e)
         {
-            bool enteredLetter = false;
-            Queue<char> text = new Queue<char>();
-            foreach (var ch in this.textBox_B_MoveTo.Text)
+            if (!textChangedByKeyB)
             {
-                if ((ch == '\b') || ('0' <= ch && ch <= '9'))
+                if (!reg.IsMatch(textBox_B_MoveTo.Text))
                 {
-                    text.Enqueue(ch);
-                }
-                else
-                {
-                    enteredLetter = true;
+                    textBox_B_MoveTo.Text = lastTextB;
+                    return;
                 }
             }
-
-            if (enteredLetter)
-            {
-                StringBuilder sb = new StringBuilder();
-                while (text.Count > 0)
-                {
-                    sb.Append(text.Dequeue());
-                }
-
-                this.textBox_B_MoveTo.Text = sb.ToString();
-                this.textBox_B_MoveTo.SelectionStart = this.textBox_B_MoveTo.Text.Length;
-            }
+            else textChangedByKeyB = false;
+            lastTextB = textBox_B_MoveTo.Text;
         }
 
         private void button_B_MoveTo_Click(object sender, EventArgs e)
         {
             byte target_board = Convert.ToByte(textBox_target.Text, 16);
             byte cmd_id = CMD_MOTOR_B_MOVE_TO;
-            UInt16 count = Convert.ToUInt16(textBox_B_MoveTo.Text, 10);
+            Int16 count = Convert.ToInt16(textBox_B_MoveTo.Text, 10);
             byte[] b = BitConverter.GetBytes(count);
             byte cmd_data_1 = b[0];//Lower Byte
             byte cmd_data_2 = b[1];//Higher Byte
